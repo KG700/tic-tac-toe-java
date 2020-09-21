@@ -21,11 +21,12 @@ public class TicTacToe {
         int playerPos = scan.nextInt();
 
         placePiece(gameBoard, playerPos, "player");
-
         Random rand = new Random();
         int cpuPos = rand.nextInt(9) + 1;
         placePiece(gameBoard, cpuPos, "cpu");
         printGameBoard(gameBoard);
+        String result = checkWinner();
+        System.out.println(result);
     }
 
     }
@@ -45,8 +46,10 @@ public class TicTacToe {
 
         if(user.equals("player")) {
             symbol = 'X';
+            playerPositions.add(pos);
         } else if (user.equals("cpu")) {
             symbol = 'O';
+            cpuPositions.add(pos);
         }
 
         switch(pos) {
@@ -102,6 +105,16 @@ public class TicTacToe {
         winConditions.add(rightCol);
         winConditions.add(cross1);
         winConditions.add(cross2);
+
+        for(List l : winConditions) {
+            if(playerPositions.containsAll(l)) {
+                return "Congratulations you won!";
+            } else if (cpuPositions.containsAll(l)) {
+                return "CPU wins! Sorry :-(";
+            } else if (playerPositions.size() + cpuPositions.size() == 9) {
+                return "CAT";
+            }
+        }
 
         return "";
     }
