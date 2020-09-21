@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
@@ -13,11 +14,15 @@ public class TicTacToe {
 
     Scanner scan = new Scanner(System.in);
     System.out.println("Enter your placement (1-9):");
-    int pos = scan.nextInt();
+    int playerPos = scan.nextInt();
 
-    System.out.println(pos);
+    System.out.println(playerPos);
 
-    placePiece(gameBoard, pos, "Player");
+    placePiece(gameBoard, playerPos, "player");
+
+    Random rand = new Random();
+    int cpuPos = rand.nextInt(9) + 1;
+    placePiece(gameBoard, cpuPos, "cpu");
     printGameBoard(gameBoard);
 
     }
@@ -33,7 +38,7 @@ public class TicTacToe {
 
     public static void placePiece(char[][] gameBoard, int pos, String user) {
 
-        char symbol = 'X';
+        char symbol = ' ';
 
         if(user.equals("player")) {
             symbol = 'X';
@@ -68,6 +73,8 @@ public class TicTacToe {
                 break;
             case 9:
                 gameBoard[4][4] = symbol;
+                break;
+            default:
                 break;
         }
     }
